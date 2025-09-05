@@ -3,106 +3,60 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Biarritz – bokning av sista dubbelrummet (2025)</title>
-  <meta name="description" content="En enkel bokningssida för vänner att boka sista dubbelrummet i Biarritz under hösten 2025." />
+  <title>Biarritz – bokning (valfria datum)</title>
+  <meta name="description" content="Boka det sista dubbelrummet i Biarritz för valfri datumperiod. Pris per dag." />
   <style>
     :root{
-      --bg: #0b0c0f;
-      --panel: #151821;
-      --muted: #8b93a7;
-      --text: #e7ebf3;
-      --accent: #6be675;
-      --accent-2: #3da1ff;
-      --danger: #ff5c77;
-      --ok: #77e1a4;
-      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.25);
-      --radius: 14px;
+      --bg:#0b0c0f; --panel:#151821; --muted:#8b93a7; --text:#e7ebf3;
+      --accent:#6be675; --accent-2:#3da1ff; --danger:#ff5c77;
+      --shadow:0 10px 30px rgba(0,0,0,.35),0 2px 6px rgba(0,0,0,.25);
+      --radius:14px;
     }
     @media (prefers-color-scheme: light){
-      :root{
-        --bg: #f5f7fb;
-        --panel: #ffffff;
-        --muted: #6b7280;
-        --text: #0b1020;
-        --accent: #16a34a;
-        --accent-2: #2563eb;
-        --danger: #e11d48;
-        --ok: #059669;
-        --shadow: 0 10px 30px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.08);
+      :root{ --bg:#f5f7fb; --panel:#fff; --muted:#6b7280; --text:#0b1020;
+        --accent:#16a34a; --accent-2:#2563eb; --danger:#e11d48;
+        --shadow:0 10px 30px rgba(0,0,0,.1),0 2px 6px rgba(0,0,0,.08);
       }
     }
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";}
-    a{color:var(--accent-2);text-decoration:none}
-    a:hover{text-decoration:underline}
+    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+    a{color:var(--accent-2);text-decoration:none} a:hover{text-decoration:underline}
     .wrap{max-width:980px;margin:32px auto;padding:0 16px}
     header{
       display:grid;gap:14px;margin-bottom:22px;align-items:center;
-      grid-template-columns: 64px 1fr auto;
+      grid-template-columns:64px 1fr auto;
       background:linear-gradient(180deg, rgba(255,255,255,.04), transparent), var(--panel);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow);
+      border-radius:var(--radius); padding:20px; box-shadow:var(--shadow);
     }
-    .badge{display:inline-block;border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:40px;color:var(--muted);font-weight:600;letter-spacing:.2px;font-size:12px}
-    .logo{
-      width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(100px 100px at 20% 15%, rgba(255,255,255,.15), transparent), linear-gradient(135deg, #141a28, #0d111a);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
-    }
+    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:radial-gradient(100px 100px at 20% 15%, rgba(255,255,255,.15), transparent), linear-gradient(135deg,#141a28,#0d111a);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
     .logo svg{width:28px;height:28px}
+    .badge{display:inline-block;border:1px solid rgba(255,255,255,.12);padding:3px 10px;border-radius:40px;color:var(--muted);font-weight:600;letter-spacing:.2px;font-size:12px}
     h1{margin:0;font-size:22px}
     .muted{color:var(--muted)}
-    .prices{display:flex;gap:10px;flex-wrap:wrap}
-    .chip{background:var(--panel);border:1px solid rgba(255,255,255,.08);padding:8px 12px;border-radius:10px}
-    .grid{display:grid;grid-template-columns: repeat(2, minmax(0,1fr));gap:16px}
-    @media (max-width:800px){.grid{grid-template-columns:1fr} header{grid-template-columns:48px 1fr; grid-auto-rows:min-content}}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), transparent), var(--panel);
-      border-radius: var(--radius);
-      padding:16px;
-      box-shadow: var(--shadow);
-      border:1px solid rgba(255,255,255,.06);
-      display:flex;flex-direction:column;gap:10px;
-    }
-    .card .top{display:flex;justify-content:space-between;gap:10px;align-items:center}
-    .date{font-weight:700}
-    .btn{
-      appearance:none;border:0;border-radius:12px;padding:10px 14px;background:var(--accent);
-      color:#0a0f14;font-weight:800;letter-spacing:.2px;cursor:pointer;box-shadow: var(--shadow);
-    }
-    .btn[disabled]{opacity:.5;cursor:not-allowed}
-    .btn.secondary{background:transparent;color:var(--text);border:1px dashed rgba(255,255,255,.25)}
-    .status{font-weight:700;font-size:12px;padding:6px 10px;border-radius:10px}
-    .status.booked{background:rgba(255,92,119,.18);color:#fff;border:1px solid rgba(255,92,119,.4)}
-    .status.free{background:rgba(107,230,117,.18);color:#fff;border:1px solid rgba(107,230,117,.4)}
-    footer{margin:20px 0;color:var(--muted);font-size:14px}
-    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
     .spacer{flex:1}
-    .small{font-size:13px;color:var(--muted)}
-    /* modal */
-    dialog{
-      border:0;border-radius:16px;background:var(--panel);color:var(--text);
-      padding:0;box-shadow: var(--shadow);max-width:580px;width:92vw
+    .chip{background:var(--panel);border:1px solid rgba(255,255,255,.08);padding:8px 12px;border-radius:10px}
+    .grid{display:grid;grid-template-columns:1fr;gap:16px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,.03), transparent), var(--panel); border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.06); display:grid; gap:12px}
+    label{font-weight:600;font-size:14px}
+    input[type="text"],input[type="email"],input[type="date"],select,textarea{
+      width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04);color:var(--text);outline:none
     }
+    textarea{min-height:80px;resize:vertical}
+    .btn{appearance:none;border:0;border-radius:12px;padding:10px 14px;background:var(--accent);color:#0a0f14;font-weight:800;letter-spacing:.2px;cursor:pointer;box-shadow:var(--shadow)}
+    .btn.secondary{background:transparent;color:var(--text);border:1px dashed rgba(255,255,255,.25)}
+    .help{font-size:12px;color:var(--muted)}
+    .price-line{font-weight:800}
+    .status{font-size:13px}
+    .list{display:grid;gap:8px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.04)}
+    .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid rgba(255,255,255,.15);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);display:none}
+    footer{margin:20px 0;color:var(--muted);font-size:14px}
+    dialog{border:0;border-radius:16px;background:var(--panel);color:var(--text);padding:0;box-shadow:var(--shadow);max-width:580px;width:92vw}
     dialog::backdrop{background:rgba(0,0,0,.55)}
     .modal-head{padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;gap:10px;align-items:center}
     .modal-body{padding:18px;display:grid;gap:12px}
     .close{border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:24px;line-height:1}
-    label{font-weight:600;font-size:14px}
-    input[type="text"],input[type="email"],select,textarea{
-      width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.04);color:var(--text);outline:none
-    }
-    textarea{min-height:80px;resize:vertical}
-    .price-line{font-weight:800;font-size:18px}
-    .help{font-size:12px;color:var(--muted)}
-    .kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:8px}
-    .kicker svg{width:16px;height:16px}
-    .right{ text-align:right }
-    .toast{
-      position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--panel);
-      border:1px solid rgba(255,255,255,.15);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow);display:none
-    }
     .admin{display:none;margin-top:10px}
     .admin.show{display:block}
   </style>
@@ -111,45 +65,78 @@
 <div class="wrap">
   <header>
     <div class="logo" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/>
-        <path d="M12 3v18M4 7.5l8 4.5 8-4.5"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/><path d="M12 3v18M4 7.5l8 4.5 8-4.5"/></svg>
     </div>
     <div>
       <div class="badge">Biarritz • Höst 2025</div>
-      <h1>Sista dubbelrummet – boka din vecka</h1>
-      <div class="muted small">Tillgängligt mellan <strong>7 september</strong> och <strong>25 oktober 2025</strong>. En vecka i taget.</div>
+      <h1>Boka sista dubbelrummet – valfria datum</h1>
+      <div class="muted">Tillgängligt mellan <strong>7 september</strong> och <strong>25 oktober 2025</strong>.</div>
     </div>
-    <div class="right">
-      <div class="prices">
-        <div class="chip">Singel: <strong id="priceSingle">—</strong> / vecka</div>
-        <div class="chip">Par: <strong id="pricePair">—</strong> / vecka</div>
-      </div>
+    <div>
+      <div class="chip">Singel: <strong id="priceSingleDay">—</strong> / dag</div>
+      <div class="chip">Par: <strong id="pricePairDay">—</strong> / dag</div>
     </div>
   </header>
 
-  <div id="weeks" class="grid" aria-live="polite"></div>
+  <div class="grid">
+    <div class="card">
+      <div class="row">
+        <div style="flex:1">
+          <label for="checkin">Incheckning</label>
+          <input id="checkin" type="date" />
+        </div>
+        <div style="flex:1">
+          <label for="checkout">Utcheckning</label>
+          <input id="checkout" type="date" />
+          <div class="help">Utcheckning är exklusiv (sista natten är dagen före).</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="flex:1">
+          <label for="type">Antal gäster</label>
+          <select id="type">
+            <option value="single">Singel</option>
+            <option value="pair">Par</option>
+          </select>
+        </div>
+        <div style="flex:1">
+          <label>Sammanfattning</label>
+          <div class="price-line" id="summary">—</div>
+          <div class="help">Pris per dag beräknas från veckopris (7 dagar).</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="btn" id="openBooking">Boka</button>
+        <button class="btn secondary" id="icsBtn" type="button">Ladda ner .ics</button>
+        <div class="spacer"></div>
+        <span class="status" id="availability">—</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <strong>Bokningar (lokalt)</strong>
+      <div id="bookingsList" class="list"></div>
+      <div class="help">OBS: Synkas inte mellan enheter – bekräfta alltid via e-post.</div>
+      <div id="admin" class="admin">
+        <hr>
+        <button class="btn secondary" id="reset">Återställ alla bokningar (lokalt)</button>
+      </div>
+    </div>
+  </div>
 
   <footer>
-    Tips: dela den här filen som en enkel webbplats (GitHub Pages, Netlify, Vercel) eller skicka filen direkt till vännerna. Bokningar synkas inte automatiskt mellan olika webbläsare – be vännerna alltid skicka bokningen via e-post när de trycker ”Boka”, så får du bekräfta i efterhand.
-    <div id="admin" class="admin">
-      <hr>
-      <strong>Admin</strong><br>
-      <button class="btn secondary" id="reset">Återställ alla bokningar (rensa lokal lagring)</button>
-    </div>
+    Tips: Publicera som GitHub Pages eller dela filen direkt. Lägg till <code>#admin</code> i URL:en för att visa återställningsknappen.
   </footer>
 </div>
 
-<dialog id="bookDlg" aria-label="Boka vecka">
+<dialog id="bookDlg" aria-label="Bokning">
   <form method="dialog" id="bookForm">
     <div class="modal-head">
       <div class="spacer">
-        <div class="kicker">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 7h8M6 11h12M10 15h8M4 5h16v14H4z"/></svg>
-          <span class="small muted">Bokning</span>
-        </div>
         <div><strong id="selDates">—</strong></div>
+        <div class="help" id="selGuests">—</div>
       </div>
       <button class="close" type="button" id="closeDlg" aria-label="Stäng">×</button>
     </div>
@@ -164,31 +151,16 @@
           <input id="email" type="email" required placeholder="namn@example.com" autocomplete="email" />
         </div>
       </div>
-      <div class="row">
-        <div style="flex:1">
-          <label for="type">Antal gäster</label>
-          <select id="type" required>
-            <option value="single">Singel</option>
-            <option value="pair">Par</option>
-          </select>
-          <div class="help">Priset gäller per vecka.</div>
-        </div>
-        <div style="flex:1">
-          <label>Pris</label>
-          <div class="price-line" id="priceLine">—</div>
-          <div class="help">Summan uppdateras när du ändrar antal gäster.</div>
-        </div>
-      </div>
       <div>
         <label for="note">Meddelande (valfritt)</label>
         <textarea id="note" placeholder="Eventuella frågor eller önskemål"></textarea>
       </div>
       <div class="row">
-        <button class="btn" id="confirmBtn" type="submit">Boka & skapa e-post</button>
-        <button class="btn secondary" id="icsBtn" type="button" title="Ladda ner kalenderhändelse">Ladda ner .ics</button>
+        <div class="price-line" id="priceLine">—</div>
         <div class="spacer"></div>
+        <button class="btn" id="confirmBtn" type="submit">Boka & skapa e-post</button>
       </div>
-      <div class="help">När du bokar öppnas ditt e-postprogram med ett färdigt meddelande till värden.</div>
+      <div class="help">När du bokar öppnas ditt e-postprogram med ett färdigifyllt meddelande till värden.</div>
     </div>
   </form>
 </dialog>
@@ -201,189 +173,160 @@ const CONFIG = {
   seasonEnd:   "2025-10-25",
   ownerEmail:  "anton@1000skis.com",
   currency:    "SEK",
-  prices:      { single: 2100, pair: 3000 },
+  weekly:      { single: 2100, pair: 3000 }, // källpriser
   houseName:   "Biarritz – dubbelrum",
   location:    "Biarritz, Frankrike"
 };
-const STORAGE_KEY = "biarritzBookings2025";
+const STORAGE_KEY = "biarritzBookings2025_RANGE";
 
-// Helpers
-const fmtDate = (d, opts={}) => new Intl.DateTimeFormat("sv-SE", { weekday:"short", day:"numeric", month:"short", ...opts }).format(d);
-const fmtDateISO = d => d.toISOString().slice(0,10);
-const fmtMoney = (n) => new Intl.NumberFormat("sv-SE").format(n) + " " + CONFIG.currency;
+// —— Helpers ——
+const dmy = (d, opts={}) => new Intl.DateTimeFormat("sv-SE",{day:"numeric",month:"short", ...opts}).format(d);
+const fmtMoney = (n) => new Intl.NumberFormat("sv-SE",{maximumFractionDigits:0}).format(Math.round(n)) + " " + CONFIG.currency;
+const iso = (d) => d.toISOString().slice(0,10);
+const parse = (isoStr) => new Date(isoStr + "T12:00:00");
+const nightsBetween = (a,b) => Math.max(0, Math.round((b - a) / 86400000));
+const overlap = (aStart,aEnd,bStart,bEnd) => (aStart < bEnd) && (aEnd > bStart);
+const withinSeason = (d) => d >= parse(CONFIG.seasonStart) && d <= parse(CONFIG.seasonEnd);
 
-function enumerateWeeks(startISO, endISO){
-  const start = new Date(startISO + "T12:00:00"); // T12 to undvika TZ-issues
-  const end   = new Date(endISO   + "T12:00:00");
-  const weeks = [];
-  let d = new Date(start);
-  while(true){
-    const wkEnd = new Date(d); wkEnd.setDate(wkEnd.getDate()+6);
-    if (wkEnd > end) break;
-    weeks.push({ start: new Date(d), end: wkEnd });
-    d.setDate(d.getDate()+7);
-  }
-  return weeks;
-}
+// priser per dag från veckopris
+const perDay = {
+  single: CONFIG.weekly.single / 7,
+  pair:   CONFIG.weekly.pair   / 7
+};
 
-function getBookings(){
-  try{ return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
-  catch(e){ return {}; }
-}
-function saveBookings(b){ localStorage.setItem(STORAGE_KEY, JSON.stringify(b)); }
+// DOM
+const checkin = document.getElementById("checkin");
+const checkout = document.getElementById("checkout");
+const typeSel = document.getElementById("type");
+const summary = document.getElementById("summary");
+const availability = document.getElementById("availability");
+const priceSingleDay = document.getElementById("priceSingleDay");
+const pricePairDay = document.getElementById("pricePairDay");
+const openBookingBtn = document.getElementById("openBooking");
+const listEl = document.getElementById("bookingsList");
 
-function toast(msg){
-  const el = document.getElementById("toast");
-  el.textContent = msg; el.style.display="block";
-  setTimeout(()=>{ el.style.display="none"; }, 2200);
-}
-
-const weeks = enumerateWeeks(CONFIG.seasonStart, CONFIG.seasonEnd);
-const bookings = getBookings();
-
-// Render
-const weeksEl = document.getElementById("weeks");
-document.getElementById("priceSingle").textContent = fmtMoney(CONFIG.prices.single);
-document.getElementById("pricePair").textContent = fmtMoney(CONFIG.prices.pair);
-
-function render(){
-  weeksEl.innerHTML = "";
-  weeks.forEach(({start,end}) => {
-    const key = fmtDateISO(start);
-    const booked = bookings[key];
-    const card = document.createElement("div");
-    card.className = "card";
-    const dateStr = `${fmtDate(start)} – ${fmtDate(end)}`;
-    card.innerHTML = `
-      <div class="top">
-        <div class="date">${dateStr}</div>
-        <div class="row">
-          <span class="status ${booked ? "booked" : "free"}">${booked ? "BOKAD" : "LEDIG"}</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small">${CONFIG.houseName} • ${CONFIG.location}</div>
-        <div class="spacer"></div>
-        ${booked ? `<div class="small">Reserverad av <strong>${booked.name.split(" ")[0]}</strong></div>` : ""}
-      </div>
-      <div class="row">
-        <button class="btn" ${booked ? "disabled" : ""} data-week="${key}">${booked ? "Inte möjlig att boka" : "Boka vecka"}</button>
-      </div>
-    `;
-    weeksEl.appendChild(card);
-  });
-  // bind buttons
-  weeksEl.querySelectorAll("button[data-week]").forEach(btn => {
-    btn.addEventListener("click", () => openModal(btn.getAttribute("data-week")));
-  });
-}
-
-render();
-
-// Modal logic
+// modal
 const dlg = document.getElementById("bookDlg");
 const selDates = document.getElementById("selDates");
+const selGuests = document.getElementById("selGuests");
 const nameInp = document.getElementById("name");
 const emailInp = document.getElementById("email");
-const typeSel = document.getElementById("type");
 const noteArea = document.getElementById("note");
 const priceLine = document.getElementById("priceLine");
 
-let currentWeek = null;
+// init UI
+priceSingleDay.textContent = fmtMoney(perDay.single);
+pricePairDay.textContent   = fmtMoney(perDay.pair);
 
-function openModal(weekKey){
-  currentWeek = weekKey;
-  const week = weeks.find(w => fmtDateISO(w.start) === weekKey);
-  selDates.textContent = `${fmtDate(week.start)} – ${fmtDate(week.end)} 2025`;
-  typeSel.value = "single";
-  nameInp.value = "";
-  emailInp.value = "";
-  noteArea.value = "";
-  updatePrice();
+// säsongsgränser i inputs
+checkin.min = CONFIG.seasonStart;
+checkin.max = CONFIG.seasonEnd;
+checkout.min = CONFIG.seasonStart;
+checkout.max = CONFIG.seasonEnd;
+
+// load bookings
+function load(){ try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch(e){ return []; } }
+function save(b){ localStorage.setItem(STORAGE_KEY, JSON.stringify(b)); }
+let bookings = load();
+
+// render bookings list
+function renderBookings(){
+  listEl.innerHTML = "";
+  if (bookings.length === 0){
+    const p = document.createElement("div");
+    p.className = "muted"; p.textContent = "Inga bokningar än.";
+    listEl.appendChild(p);
+    return;
+  }
+  bookings.sort((a,b)=> a.start.localeCompare(b.start));
+  bookings.forEach(bk => {
+    const div = document.createElement("div");
+    const a = parse(bk.start), b = parse(bk.end);
+    div.innerHTML = `<span class="pill">${dmy(a)}–${dmy(new Date(b-86400000))} (${nightsBetween(a,b)} nätter) – ${bk.type==="single"?"Singel":"Par"} – ${fmtMoney(bk.total)}</span>`;
+    listEl.appendChild(div);
+  });
+}
+renderBookings();
+
+// summary/availability calc
+function recalc(){
+  const sVal = checkin.value, eVal = checkout.value;
+  if(!sVal || !eVal){ summary.textContent = "Välj datum."; availability.textContent = "—"; return; }
+  const s = parse(sVal), e = parse(eVal);
+  if (!(withinSeason(s) && withinSeason(e))) {
+    summary.textContent = "Datum måste ligga inom säsong."; availability.textContent = "❌ Utanför säsong"; return;
+  }
+  if (e <= s){ summary.textContent = "Utcheckning måste vara efter incheckning."; availability.textContent = "❌ Ogiltigt intervall"; return; }
+  const nights = nightsBetween(s,e);
+  const pd = perDay[typeSel.value];
+  const total = Math.round(pd * nights);
+  const free = bookings.every(bk => !overlap(s,e, parse(bk.start), parse(bk.end)));
+  summary.textContent = `${nights} natt${nights!==1?"er":""} · ${typeSel.value==="single"?"Singel":"Par"} · ${fmtMoney(pd)} / dag · Totalt ${fmtMoney(total)}`;
+  availability.textContent = free ? "✅ Tillgängligt" : "❌ Krockar med annan bokning";
+  availability.style.color = free ? "" : "var(--danger)";
+}
+["change","input"].forEach(ev=>{
+  checkin.addEventListener(ev,recalc);
+  checkout.addEventListener(ev,recalc);
+  typeSel.addEventListener(ev,recalc);
+});
+recalc();
+
+// open modal
+document.getElementById("openBooking").addEventListener("click", ()=>{
+  const sVal = checkin.value, eVal = checkout.value;
+  if(!sVal || !eVal) { alert("Välj in- och utcheckning först."); return; }
+  const s = parse(sVal), e = parse(eVal);
+  if (e <= s) { alert("Utcheckning måste vara efter incheckning."); return; }
+  // check availability
+  if (!bookings.every(bk => !overlap(s,e, parse(bk.start), parse(bk.end)))){
+    alert("Valda datum krockar med en befintlig bokning."); return;
+  }
+  const nights = nightsBetween(s,e);
+  const pd = perDay[typeSel.value], total = Math.round(pd * nights);
+  selDates.textContent = `${dmy(s,{weekday:"short"})} – ${dmy(new Date(e-86400000),{weekday:"short"})} (${nights} natt${nights!==1?"er":""})`;
+  selGuests.textContent = `${typeSel.value==="single"?"Singel":"Par"} · ${fmtMoney(pd)} / dag · Totalt ${fmtMoney(total)}`;
+  priceLine.textContent = `Summa: ${fmtMoney(total)}`;
   dlg.showModal();
   setTimeout(()=> nameInp.focus(), 0);
-}
-document.getElementById("closeDlg").addEventListener("click", () => dlg.close());
-
-function updatePrice(){
-  const weekly = CONFIG.prices[typeSel.value];
-  priceLine.textContent = fmtMoney(weekly) + " totalt";
-}
-typeSel.addEventListener("change", updatePrice);
-
-// ICS generation
-function downloadICS(weekKey){
-  const wk = weeks.find(w => fmtDateISO(w.start) === weekKey);
-  const toICSDate = (d) => d.toISOString().replace(/[-:]/g,"").split(".")[0] + "Z";
-  const dtStart = new Date(Date.UTC(wk.start.getFullYear(), wk.start.getMonth(), wk.start.getDate()));
-  const dtEnd   = new Date(Date.UTC(wk.end.getFullYear(), wk.end.getMonth(), wk.end.getDate()+1)); // end-exclusive
-  const uid = `biarritz-${fmtDateISO(wk.start)}@1000skis`;
-  const ics = [
-    "BEGIN:VCALENDAR",
-    "VERSION:2.0",
-    "PRODID:-//Biarritz Booking//EN",
-    "CALSCALE:GREGORIAN",
-    "METHOD:PUBLISH",
-    "BEGIN:VEVENT",
-    `UID:${uid}`,
-    `SUMMARY:${CONFIG.houseName}`,
-    `DTSTART;VALUE=DATE:${toICSDate(dtStart).slice(0,8)}`,
-    `DTEND;VALUE=DATE:${toICSDate(dtEnd).slice(0,8)}`,
-    `LOCATION:${CONFIG.location}`,
-    "DESCRIPTION:Bokad vecka i Biarritz.",
-    "END:VEVENT",
-    "END:VCALENDAR"
-  ].join("\r\n");
-  const blob = new Blob([ics], {type:"text/calendar"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = `Biarritz_${fmtDateISO(wk.start)}.ics`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-}
-
-document.getElementById("icsBtn").addEventListener("click", () => {
-  if(!currentWeek) return;
-  downloadICS(currentWeek);
-  toast("Kalenderfil nedladdad.");
 });
+document.getElementById("closeDlg").addEventListener("click", ()=> dlg.close());
 
-// Submit booking
-document.getElementById("bookForm").addEventListener("submit", (e) => {
+// confirm booking (mailto + save)
+document.getElementById("bookForm").addEventListener("submit", (e)=>{
   e.preventDefault();
-  if(!currentWeek) return;
-  const wk = weeks.find(w => fmtDateISO(w.start) === currentWeek);
-  const weekly = CONFIG.prices[typeSel.value];
-  const total = weekly; // en vecka per bokning
-  // Spara lokalt
-  bookings[currentWeek] = {
-    name: nameInp.value.trim(),
-    email: emailInp.value.trim(),
-    type: typeSel.value,
-    note: noteArea.value.trim(),
-    price: total,
-    ts: Date.now()
-  };
-  saveBookings(bookings);
-  render();
+  const s = parse(checkin.value), eDate = parse(checkout.value);
+  const nights = nightsBetween(s,eDate);
+  const pd = perDay[typeSel.value], total = Math.round(pd * nights);
+  // save
+  bookings.push({
+    start: iso(s), end: iso(eDate),
+    type: typeSel.value, name: nameInp.value.trim(), email: emailInp.value.trim(),
+    note: noteArea.value.trim(), total, ts: Date.now()
+  });
+  save(bookings);
+  renderBookings();
+  recalc();
   dlg.close();
-  // Förbered mailto
+
   const who = typeSel.value === "single" ? "Singel" : "Par";
-  const subject = encodeURIComponent(`[Bokning] ${CONFIG.houseName} – ${fmtDate(wk.start)}–${fmtDate(wk.end)} 2025 – ${who} – ${nameInp.value.trim()}`);
+  const subject = encodeURIComponent(`[Bokning] ${CONFIG.houseName} – ${dmy(s)}–${dmy(new Date(eDate-86400000))} (${nights} nätter) – ${who} – ${nameInp.value.trim()}`);
   const lines = [
     `Hej!`,
     ``,
     `Jag vill boka ${CONFIG.houseName} i ${CONFIG.location}.`,
-    `Vecka: ${fmtDate(wk.start)}–${fmtDate(wk.end)} 2025`,
+    `Incheckning: ${iso(s)}`,
+    `Utcheckning: ${iso(eDate)} (exklusiv)`,
+    `Nätter: ${nights}`,
     `Gäster: ${who}`,
-    `Pris: ${fmtMoney(total)} (1 vecka)`,
+    `Pris per dag: ${fmtMoney(pd)}`,
+    `Summa: ${fmtMoney(total)}`,
     ``,
     `Namn: ${nameInp.value.trim()}`,
     `E-post: ${emailInp.value.trim()}`,
     noteArea.value.trim() ? `Meddelande: ${noteArea.value.trim()}` : ``,
     ``,
-    `Skapad från den lilla bokningssidan. Vänligen bekräfta via svar.`
+    `Skapad från bokningssidan. Vänligen bekräfta via svar.`
   ].filter(Boolean);
   const body = encodeURIComponent(lines.join("\n"));
   const mailto = `mailto:${encodeURIComponent(CONFIG.ownerEmail)}?subject=${subject}&body=${body}`;
@@ -391,15 +334,45 @@ document.getElementById("bookForm").addEventListener("submit", (e) => {
   toast("Öppnar e-post för att skicka bokningen…");
 });
 
-// Admin reset om URL har #admin
+// ICS download
+document.getElementById("icsBtn").addEventListener("click", ()=>{
+  if(!checkin.value || !checkout.value) { alert("Välj datum först."); return; }
+  const s = parse(checkin.value), e = parse(checkout.value);
+  if (e <= s) { alert("Utcheckning måste vara efter incheckning."); return; }
+  const toICSDate = (d) => d.toISOString().replace(/[-:]/g,"").split(".")[0]+"Z";
+  const dtStart = new Date(Date.UTC(s.getFullYear(), s.getMonth(), s.getDate()));
+  const dtEnd   = new Date(Date.UTC(e.getFullYear(), e.getMonth(), e.getDate())); // end-exclusive
+  const uid = `biarritz-${iso(s)}-${iso(e)}@1000skis`;
+  const ics = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Biarritz Booking//EN","CALSCALE:GREGORIAN","METHOD:PUBLISH",
+    "BEGIN:VEVENT",
+    `UID:${uid}`,
+    `SUMMARY:${CONFIG.houseName}`,
+    `DTSTART;VALUE=DATE:${toICSDate(dtStart).slice(0,8)}`,
+    `DTEND;VALUE=DATE:${toICSDate(dtEnd).slice(0,8)}`,
+    `LOCATION:${CONFIG.location}`,
+    "DESCRIPTION:Bokad datumperiod i Biarritz.",
+    "END:VEVENT","END:VCALENDAR"
+  ].join("\r\n");
+  const blob = new Blob([ics], {type:"text/calendar"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `Biarritz_${iso(s)}_${iso(e)}.ics`; document.body.appendChild(a); a.click(); a.remove();
+});
+
+// toast + admin
+function toast(msg){
+  const el = document.getElementById("toast");
+  el.textContent = msg; el.style.display="block";
+  setTimeout(()=> el.style.display="none", 2200);
+}
 if (location.hash.includes("admin")){
   const admin = document.getElementById("admin");
   admin.classList.add("show");
-  document.getElementById("reset").addEventListener("click", () => {
+  document.getElementById("reset").addEventListener("click", ()=>{
     if(confirm("Är du säker på att du vill radera alla bokningar (lokalt)?")){
       localStorage.removeItem(STORAGE_KEY);
-      for (const k in bookings) delete bookings[k];
-      render();
+      bookings = [];
+      renderBookings();
+      recalc();
       toast("Alla bokningar raderade (lokalt).");
     }
   });
